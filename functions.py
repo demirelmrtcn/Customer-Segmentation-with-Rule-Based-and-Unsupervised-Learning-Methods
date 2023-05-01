@@ -26,7 +26,7 @@ warnings.simplefilter('ignore')
 lim_list = [300, 10, 1500]
 
 def ulke_ayirici(ulke_adi: str):
-    dataframe = pd.read_excel("C:/PY/tez/online_retail.xlsx")
+    dataframe = pd.read_excel("online_retail.xlsx")
     df_new = dataframe[dataframe["Country"] == ulke_adi]
     return df_new
 
