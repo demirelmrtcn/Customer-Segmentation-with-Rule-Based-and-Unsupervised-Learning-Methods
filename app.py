@@ -35,14 +35,8 @@ if page == "RFM Analizi":
 
     st.write("""Bu sayfada tahmin edilecek ülke seçilerek sonuçlar elde edilmektedir.""")
     country_selection = st.selectbox("Tahmin Edilecek Ülkeyi Seçiniz.",
-                                     ['United Kingdom', 'France', 'Australia', 'Netherlands', 'Germany',
-                                      'Norway', 'EIRE', 'Switzerland', 'Spain', 'Poland', 'Portugal', 'Italy',
-                                      'Belgium', 'Lithuania', 'Japan', 'Iceland', 'Channel Islands',
-                                      'Denmark', 'Cyprus', 'Sweden', 'Austria', 'Israel',
-                                      'Finland', 'Bahrain', 'Greece', 'Hong Kong', 'Singapore',
-                                      'Lebanon', 'United Arab Emirates', 'Saudi Arabia', 'Czech Republic',
-                                      'Canada', 'Unspecified', 'Brazil', 'USA',
-                                      'European Community', 'Malta', 'RSA'])
+                                     ['United Kingdom', 'France', 'Germany', 'Switzerland', 'Spain', 'Portugal',
+                                      'Belgium'])
     cluster_choice = st.selectbox("Kümeleme yapacağınız yöntemi seçiniz.", ["KMeans Kümeleme", "Hiyerarşik Kümeleme"])
     button = st.button("Sonuçları Tahmin Et.")
 

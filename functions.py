@@ -12,6 +12,7 @@ import datetime as dt
 import warnings
 import streamlit as st
 import streamlit_ext as ste
+import pickle
 
 import plotly.graph_objs as go
 import plotly.offline as pyo
@@ -22,16 +23,23 @@ from plotly.offline import iplot
 
 warnings.simplefilter('ignore')
 
-
 lim_list = [300, 10, 1500]
 
+dataframe = pd.read_excel("online_retail.xlsx")
+dataframe_dict = {country: dataframe[dataframe["Country"] == country] for country in dataframe["Country"].unique()}
+
 def ulke_ayirici(ulke_adi: str):
-    dataframe = pd.read_excel("online_retail.xlsx")
-    df_new = dataframe[dataframe["Country"] == ulke_adi]
-    return df_new
+     return dataframe_dict.get(ulke_adi, pd.DataFrame())
+
+# def ulke_ayirici(ulke_adi: str):
+    # dataframe = pd.read_excel("online_retail.xlsx")
+    # df_new = dataframe[dataframe["Country"] == ulke_adi]
+    # return df_new
+
 
 def convert_df(df):
     return df.to_csv().encode('utf-8')
+
 
 def cluster_visualizer(dataframe, cluster, lim):
     trace2 = go.Bar(x=dataframe.groupby(cluster).agg({'recency': 'mean'}).reset_index()[cluster],
@@ -77,6 +85,7 @@ def cluster_visualizer(dataframe, cluster, lim):
     fig.update_layout(template='plotly_white')
 
     st.plotly_chart(fig)
+
 
 def kmeans_kumeleme(dataframe):
     # Veri setinin hazırlanması
@@ -136,6 +145,7 @@ def kmeans_kumeleme(dataframe):
     clus_data_test = clus_data_test.rename_axis("cluster")
     csv = convert_df(clus_data_test)
     ste.download_button("CSV Dosyasını İndirmek İçin Tıklayınız.", csv, "rapor.csv")
+
 
 def hiyerarsik_kumeleme(dataframe):
     # Veri setinin hazırlanması
